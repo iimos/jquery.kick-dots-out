@@ -21,14 +21,16 @@
             if (insertSpace) {
               t = spaceTag + t
             }
-            t = t.replace(/([\.\,])\s/g, dotTag + spaceTag)
+
             len = t.length
-            t = t.replace(/([\.\,])$/, dotTag)
+            t = t.replace(/([\.\,]+)\s*$/, dotTag)
             
             // Если текст изменился при предыдущей замене, 
             // т.е. если в конце была точка, то в начале 
             // следующего текста вставляем "волшебный" пробел.
             insertSpace = (len != t.length)
+            
+            t = t.replace(/([\.\,])\s/g, dotTag + spaceTag)
 
             $(this).replaceWith(t)
           }

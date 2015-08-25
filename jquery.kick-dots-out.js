@@ -9,12 +9,12 @@
     $(el).contents().each(function () {
       switch (this.nodeType) {
 
-        // тег
+        // tag node
         case 1:
           wrapDots(this)
           break;
 
-        // текст
+        // text node
         case 3:
           if (this.nodeValue.length) {
             t = this.nodeValue
@@ -25,9 +25,8 @@
             len = t.length
             t = t.replace(/([\.\,]+)\s*$/, dotTag)
             
-            // Если текст изменился при предыдущей замене, 
-            // т.е. если в конце была точка, то в начале 
-            // следующего текста вставляем "волшебный" пробел.
+            // If text was changed at last operation then (i.e. text node ends with dot)
+            // at the begining of next text node insert "magic space"
             insertSpace = (len != t.length)
             
             t = t.replace(/([\.\,])\s/g, dotTag + spaceTag)

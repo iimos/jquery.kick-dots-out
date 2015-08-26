@@ -4,25 +4,81 @@
     <link href='./kick-dots-out.css' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
     <script src="./jquery.kick-dots-out.js" type="text/javascript"></script>
+    <script>
+      jQuery(function ($) {
+        var ex2 = $("#example2")
+        
+        function wide() {
+          setTimeout(function () {
+            ex2.animate({width: 500}, 3000, narrow)
+          }, 1000)
+        }
+        function narrow() {
+          setTimeout(function () {
+            ex2.animate({width: 270}, 3000, wide)
+          }, 1000)
+        }
+
+        ex2.height(ex2.height())
+        wide()
+      })
+    </script>
     <style>
+      body {
+        text-align: center; 
+        font-size: 40px; 
+        padding: 5% 0;
+      }
       .kick-dots-out__dot {
         color: red;
+      }
+      #example2 {
+        width: 270px;
+        margin: 0 auto;
+        border-left: 1px double #666;
+        border-right: 1px double #666;
       }
     </style>
   </head>
   <body>
-    <div style="text-align:center; font-size: 40px; margin: 8% 0 3%">
-      Однажды,<br>
-      в студеную<br>
-      змнюю пору ...
+
+    <div id="example1">
+      <div>
+        A long time ago<br/> 
+        in a galaxy far,<br/> 
+        far away ...
+      </div>
+      <div style="margin: 3%">
+        ↓
+      </div>
+      <div class="kick-dots-out">
+        A long time ago<br/> 
+        in a galaxy far,<br/> 
+        far away ...
+      </div>
     </div>
-    <div style="text-align:center; font-size: 40px;">
-      ↓
+    
+    <br/>
+    <hr/>
+    <br/>
+    
+    <div id="example2">
+      <div>
+        Centred text
+        Centred text,
+        Centred text.
+        Centred text ...
+      </div>
+      <div style="margin: 3%">
+        ↓
+      </div>
+      <div class="kick-dots-out">
+        Centred text
+        Centred text,
+        Centred text.
+        Centred text ...
+      </div>
     </div>
-    <div class="kick-dots-out" style="text-align:center; font-size: 40px;  margin: 3% 0 0">
-      Однажды,<br>
-      в студеную<br>
-      змнюю пору ...
-    </div>
+
   </body>
 </html>

@@ -36,6 +36,10 @@
           break;
       }
     })
+    .end()
+    .find(".kick-dots-out__s").css("word-spacing", function () { 
+      return $(this).prev(".kick-dots-out__dot").width() 
+    })
   }
 
   $.fn.kickDotsOut = function () {

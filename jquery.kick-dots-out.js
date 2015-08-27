@@ -4,11 +4,12 @@
       spaceTag = "<span class='kick-dots-out__s'> </span>",
       insertSpace;
 
-  function wrapDots(el, child) {
+  function wrapDots(el) {
+    insertSpace = false
+    _wrapDots(el)
+  }
+  function _wrapDots(el) {
     var t, len;
-    if (!child) {
-      insertSpace = false;
-    }
     $(el).contents().each(function () {
       switch (this.nodeType) {
 

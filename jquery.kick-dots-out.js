@@ -2,16 +2,21 @@
 
   var dotTag = "<span class='kick-dots-out__dot'>$1</span>",
       spaceTag = "<span class='kick-dots-out__s'> </span>",
-      insertSpace = false;
+      insertSpace;
 
-  function wrapDots(el) {
+  function wrapDots(el, child) {
     var t, len;
+    if (!child) {
+      insertSpace = false;
+    }
     $(el).contents().each(function () {
       switch (this.nodeType) {
 
         // tag node
         case 1:
-          wrapDots(this)
+          if (!$(this).hasClass("kick-dots-out__dot")) {
+            wrapDots(this, true)
+          }
           break;
 
         // text node
@@ -40,7 +45,7 @@
 
   $.fn.kickDotsOut = function () {
     return this.each(function () {
-      wrapDots(this)
+      wrapDots(this);
       var spaces = $(".kick-dots-out__s", this), fs;
       
       $(".kick-dots-out__dot", this).each(function (i) {

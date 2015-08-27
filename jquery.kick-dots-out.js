@@ -29,13 +29,13 @@
             }
 
             len = t.length
-            t = t.replace(/([\.\,]+)\s*$/, dotTag)
+            t = t.replace(/([\.\,\?\!\;\:]+)\s*$/, dotTag)
             
             // If text was changed at last operation then (i.e. text node ends with dot)
             // at the begining of next text node insert "magic space"
             insertSpace = (len != t.length)
             
-            t = t.replace(/([\.\,])\s/g, dotTag + spaceTag)
+            t = t.replace(/([\.\,\?\!\;\:])\s/g, dotTag + spaceTag)
 
             $(this).replaceWith(t)
           }

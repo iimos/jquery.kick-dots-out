@@ -36,15 +36,24 @@
           break;
       }
     })
-    .end()
-    .find(".kick-dots-out__s").css("word-spacing", function () { 
-      return $(this).prev(".kick-dots-out__dot").width() 
-    })
+    // .end()
+    // .find(".kick-dots-out__s").css("word-spacing", function () { 
+    //   return $(this).prev(".kick-dots-out__dot").width() 
+    // })
   }
 
   $.fn.kickDotsOut = function () {
     return this.each(function () {
       wrapDots(this)
+
+      var dots = $(".kick-dots-out__dot", this), 
+          spaces = $(".kick-dots-out__s", this),
+          fs;
+
+      dots.each(function (i) {
+        fs = parseFloat($(this).css("font-size"))
+        $(spaces[i]).css("word-spacing", ($(this).width()/fs) + "em")
+      })
     })
   }
 

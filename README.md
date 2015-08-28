@@ -1,20 +1,29 @@
 # jquery.kick-dots-out
 
-JS library for real aligment text at center.
+jQuery plugin for real aligment text at center.
 
 <img src="http://iimos.github.io/jquery.kick-dots-out/example.jpg"/>
 
-# Usage
+[Demo](http://iimos.github.io/jquery.kick-dots-out/)
 
-Just add class "kick-dots-out".
+## Usage
+
+Include `jquery.kick-dots-out.js` and `kick-dots-out.css` in your page:
 ```html
-<div class="kick-dots-out">
+<link href="kick-dots-out.css" rel="stylesheet"/>
+<script src="jquery.js" type="text/javascript"></script>
+<script src="jquery.kick-dots-out.js" type="text/javascript"></script>
+```
+
+Just add class "kick-dots-out":
+```html
+<div class="kick-dots-out" style="text-align: center">
   A long time ago in a galaxy far, far away ...
 </div>
 ```
 
-OR
+Or via javascript:
 
 ```javascript
-  $(...).kickDotsOut()
+  $('.some-centred-text').kickDotsOut()
 ```

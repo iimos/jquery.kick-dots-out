@@ -2,6 +2,7 @@
 
   var dotTag = "<span class='kick-dots-out__dot'>$1</span>",
       spaceTag = "<span class='kick-dots-out__s'> </span>",
+      rDotClass = /(^|\s)kick\-dots\-out__dot(\s|$)/,
       insertSpace;
 
   function wrapDots(el) {
@@ -9,21 +10,21 @@
     _wrapDots(el)
   }
   function _wrapDots(el) {
-    var t, len;
-    $(el).contents().each(function () {
-      switch (this.nodeType) {
+    var node = el.firstChild, t, len, tmp, next, newChild;
+    do {
+      switch (node.nodeType) {
 
         // tag node
         case 1:
-          if (!$(this).hasClass("kick-dots-out__dot")) {
-            wrapDots(this, true)
+          if (!rDotClass.test(node.className)) {
+            _wrapDots(node, true)
           }
           break;
 
         // text node
         case 3:
-          if (this.nodeValue.length) {
-            t = this.nodeValue
+          if (node.nodeValue.length) {
+            t = node.nodeValue
             if (insertSpace) {
               t = spaceTag + t
             }
@@ -37,11 +38,18 @@
             
             t = t.replace(/([\.\,\?\!\;\:])\s/g, dotTag + spaceTag)
 
-            $(this).replaceWith(t)
+            tmp = document.createElement("i")
+            tmp.innerHTML = t
+            while (tmp.firstChild) {
+              newChild = el.insertBefore(tmp.firstChild, node)
+            }
+            el.removeChild(node)
+            node = newChild
           }
           break;
       }
-    })
+    }
+    while (node = node.nextSibling)
   }
 
   $.fn.kickDotsOut = function () {

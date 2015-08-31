@@ -2,7 +2,7 @@
 
 var dotTag = "<span class='kick-dots-out__dot'>$1</span>",
     spaceTag = "<span class='kick-dots-out__s'> </span>",
-    rDotClass = /(^|\s)kick\-dots\-out__dot(\s|$)/,
+    rDotClass = /(?:^|\s)kick\-dots\-out__dot(?:\s|$)/,
     insertSpace;
 
 function wrapDots(el) {

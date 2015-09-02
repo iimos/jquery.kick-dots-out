@@ -1,8 +1,9 @@
 (function ($) {
 
-var dotTag = "<span class='kick-dots-out__dot'>$1</span>",
-    spaceTag = "<span class='kick-dots-out__s'> </span>",
-    rDotClass = /(?:^|\s)kick\-dots\-out__dot(?:\s|$)/,
+var dotClass = "kick-dots-out__dot",
+    spaceClass = "kick-dots-out__s",
+    dotTag = "<span class='" + dotClass + "'>$1</span>",
+    spaceTag = "<span class='" + spaceClass + "'> </span>",
     insertSpace;
 
 function wrapDots(el) {
@@ -16,7 +17,7 @@ function _wrapDots(el) {
 
       // tag node
       case 1:
-        if (!rDotClass.test(node.className)) {
+        if ((" " + node.className + " ").search(" " + dotClass + " ") == -1) {
           _wrapDots(node, true)
         }
         break;
@@ -55,9 +56,9 @@ function _wrapDots(el) {
 $.fn.kickDotsOut = function () {
   return this.each(function () {
     wrapDots(this);
-    var spaces = $(".kick-dots-out__s", this), fs;
+    var spaces = $("." + spaceClass, this), fs;
     
-    $(".kick-dots-out__dot", this).each(function (i) {
+    $("." + dotClass, this).each(function (i) {
       fs = parseFloat($(this).css("font-size"))
       $(spaces[i]).css("word-spacing", ($(this).width()/fs) + "em")
     })

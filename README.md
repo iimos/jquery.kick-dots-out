@@ -26,3 +26,6 @@ Or via javascript:
 ```javascript
   kickDotsOut(".some-centred-text")
 ```
+
+## Requirements
+No requirements

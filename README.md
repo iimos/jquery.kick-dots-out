@@ -1,4 +1,4 @@
-# jquery.kick-dots-out
+# kick-dots-out.js
 
 JS library for real aligment text at center.
 

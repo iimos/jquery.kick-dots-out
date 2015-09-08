@@ -1,4 +1,4 @@
-(function ($) {
+!function () {
 
 var dotClass = "kick-dots-out__dot",
     spaceClass = "kick-dots-out__s",
@@ -53,20 +53,38 @@ function _wrapDots(el) {
   while (node = node.nextSibling)
 }
 
-$.fn.kickDotsOut = function () {
-  return this.each(function () {
-    wrapDots(this);
-    var spaces = $("." + spaceClass, this), fs;
+function kickDotsOut(selector, context) {
+  if (document.querySelectorAll) {
+    var list = (context || document).querySelectorAll(selector), 
+        i = list.length,
+        j,
+        el, 
+        spaces,
+        dots, 
+        fs, 
+        w;
     
-    $("." + dotClass, this).each(function (i) {
-      fs = parseFloat($(this).css("font-size"))
-      $(spaces[i]).css("word-spacing", ($(this).width()/fs) + "em")
-    })
+    while (i) {
+      el = list[--i]
+      console.log(el)
+      wrapDots(el)
+      spaces = el.querySelectorAll("." + spaceClass)
+      dots = el.querySelectorAll("." + dotClass)
+      for (j = 0; j < dots.length; j++) {
+        if (spaces[j]) {
+          fs = parseFloat(dots[j].style.fontSize)
+          w = parseFloat(dots[j].clientWidth)
+          spaces[j].style.wordSpacing = w/fs + "em"
+        }
+      }
+    }
+  }
+}
+
+if (document.addEventListener) {
+  document.addEventListener('DOMContentLoaded', function() {
+    kickDotsOut(".kick-dots-out")
   })
 }
 
-$(function () {
-  $(".kick-dots-out").kickDotsOut()
-})
-
-})(jQuery);
+}();

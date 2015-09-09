@@ -6,11 +6,11 @@ var dotClass = "kick-dots-out__dot",
     spaceTag = "<span class='" + spaceClass + "'> </span>",
     insertSpace;
 
-function wrapDots(el) {
+function wrap(el) {
   insertSpace = false
-  _wrapDots(el)
+  _wrap(el)
 }
-function _wrapDots(el) {
+function _wrap(el) {
   var node = el.firstChild, t, len, tmp, next, newChild;
   do {
     switch (node.nodeType) {
@@ -18,7 +18,7 @@ function _wrapDots(el) {
       // tag node
       case 1:
         if ((" " + node.className + " ").search(" " + dotClass + " ") == -1) {
-          _wrapDots(node, true)
+          _wrap(node, true)
         }
         break;
 
@@ -66,8 +66,7 @@ function kickDotsOut(selector, context) {
     
     while (i) {
       el = list[--i]
-      console.log(el)
-      wrapDots(el)
+      wrap(el)
       spaces = el.querySelectorAll("." + spaceClass)
       dots = el.querySelectorAll("." + dotClass)
       for (j = 0; j < dots.length; j++) {

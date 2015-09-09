@@ -28,4 +28,4 @@ Or via javascript:
 ```
 
 ## Requirements
-No requirements
+No requirements.

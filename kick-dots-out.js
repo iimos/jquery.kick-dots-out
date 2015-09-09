@@ -1,10 +1,8 @@
 !function () {
 
-var dotClass = "kick-dots-out__dot",
-    leftClass = "kick-dots-out__l",
+var leftClass = "kick-dots-out__l",
     rightClass = "kick-dots-out__r",
     spaceClass = "kick-dots-out__s",
-    dotTag = "<span class='" + dotClass + "'>$1</span>",
     spaceTag = "<span class='" + spaceClass + "'> </span>",
     insertSpace;
 
@@ -13,13 +11,16 @@ function wrap(el) {
   _wrap(el)
 }
 function _wrap(el) {
-  var node = el.firstChild, t, words, w, i, len, tmp, next, newChild;
+  var node = el.firstChild, text, words, i, tmp, next, newChild;
   do {
     switch (node.nodeType) {
 
       // tag node
       case 1:
-        if ((" " + node.className + " ").search(" " + dotClass + " ") == -1) {
+        if (
+          (" " + node.className + " ").search(" " + rightClass + " ") == -1 && 
+          (" " + node.className + " ").search(" " + leftClass + " ") == -1
+        ) {
           _wrap(node, true)
         }
         break;
@@ -35,18 +36,18 @@ function _wrap(el) {
               .replace(/^(["'«\()]+)/, "<span class='" + leftClass + "'>$1</span>")
           }
 
-          t = words.join(spaceTag)
+          text = words.join(spaceTag)
 
           if (insertSpace) {
-            t = spaceTag + t
+            text = spaceTag + text
           }
 
           // If text was changed at last operation then (i.e. text node ends with dot)
           // at the begining of next text node insert "magic space"
-          insertSpace = t.endsWith("</span>")
+          insertSpace = text.endsWith("</span>")
           
           tmp = document.createElement("i")
-          tmp.innerHTML = t
+          tmp.innerHTML = text
           while (tmp.firstChild) {
             newChild = el.insertBefore(tmp.firstChild, node)
           }
@@ -93,9 +94,14 @@ function kickDotsOut(selector, context) {
           next.style.display = "inline"
         }
         
-        if (prev && prev.className == rightClass) {
-          prev.style.position = "absolute"
-          w += parseFloat(prev.clientWidth)
+        if (prev && 1 == prev.nodeType) {
+          if (prev.className != rightClass) {
+            while (prev.lastChild && 1 == prev.lastChild.nodeType) prev = prev.lastChild       
+          }
+          if (prev && prev.className == rightClass) {
+            prev.style.position = "absolute"
+            w += parseFloat(prev.clientWidth)
+          }
         }
         
         fs = parseFloat(window.getComputedStyle(space)["font-size"])

@@ -1,13 +1,13 @@
 .kick-dots-out__dot {
-  position: absolute;
+  /*position: absolute;*/
 }
 .kick-dots-out__s {
-  word-spacing: .25em;
+  /*word-spacing: .25em;*/
 }
 /*.kick-dots-out__s + .kick-dots-out__s {*/
   /*display: inline-block;*/
   /*white-space: pre;   чтобы двойные пробелы «не слипались» */
 /*}*/
 .kick-dots-out__left {
-  margin-left: -.7em;
+  /*margin-left: -.7em;*/
 }

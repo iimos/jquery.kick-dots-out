@@ -8,9 +8,8 @@ JS library for real aligment text at center.
 
 ## Usage
 
-Include `kick-dots-out.js` and `kick-dots-out.css` in your page:
+Include `kick-dots-out.js` in your page:
 ```html
-<link href="kick-dots-out.css" rel="stylesheet"/>
 <script src="kick-dots-out.js" type="text/javascript"></script>
 ```
 
